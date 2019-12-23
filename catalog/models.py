@@ -38,7 +38,7 @@ class Book(models.Model):
         return ', '.join(genre.name for genre in self.genre.all()[:3])
     
     display_genre.short_description = 'Genre'
-
+    
 import uuid # Required for unique book instances
 
 class BookInstance(models.Model):
