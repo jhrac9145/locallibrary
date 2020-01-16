@@ -18,6 +18,11 @@ class Genre(models.Model):
 
         return self.name
 
+class Price(models.Model):
+    value = models.IntegerField()
+
+    def __str__(self):
+        return str(self.value)
 
 class Book(models.Model):
 
@@ -34,7 +39,8 @@ class Book(models.Model):
         help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>',
     )
     genre = models.ManyToManyField("Genre", help_text="Select a genre for this book")
-    
+    value = models.ForeignKey("Price", on_delete=models.SET_NULL, null=True)
+
     CHOICE_LANGUAGE = (
         ("af", "Afrikaans"),
         ("ar", "Arabic"),
