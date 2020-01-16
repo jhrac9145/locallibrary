@@ -38,8 +38,12 @@ class Book(models.Model):
         max_length=13,
         help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>',
     )
-    genre = models.ManyToManyField("Genre", help_text="Select a genre for this book")
     value = models.ForeignKey("Price", on_delete=models.SET_NULL, null=True)
+    genre = models.ManyToManyField("Genre", help_text="Select a genre for this book")
+
+    def display_genre(self):
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+    display_genre.short_description = 'Genre'
 
     CHOICE_LANGUAGE = (
         ("af", "Afrikaans"),
