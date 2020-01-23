@@ -18,11 +18,13 @@ class Genre(models.Model):
 
         return self.name
 
+
 class Price(models.Model):
     value = models.IntegerField()
 
     def __str__(self):
         return str(self.value)
+
 
 class Book(models.Model):
 
