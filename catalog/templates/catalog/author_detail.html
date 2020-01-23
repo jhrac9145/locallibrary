@@ -7,6 +7,7 @@
 {% block content %}
   <h1>Author: {{ author.first_name }} {{ author.last_name }}</h1>
     {{ author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif%}
+    <!-- Author.objects.get(pk=3).book_set.get(pk=2) 형식임 따라치라는거아님 님이 정보 추적해서 해야함. vars, dir 이용! -->
   <hr>
     <h4>Books</h4>
       <p><strong> {{ author.book }} </strong></p>
