@@ -5,8 +5,10 @@
 {% endblock %} 
 
 {% block content %}
-  <h1>Name: {{ author.first_name }} </h1>
-  <h1>Name: {{ author.first_name }} </h1>
-  <h1>Name: {{ author.first_name }} </h1>
-  <h1>Name: {{ author.first_name }} </h1>
+  <h1>Author: {{ author.first_name }} {{ author.last_name }}</h1>
+    {{ author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif%}
+  <hr>
+    <h4>Books</h4>
+      <p><strong> {{ author.book }} </strong></p>
+
 {% endblock %}
