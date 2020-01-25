@@ -10,12 +10,10 @@
     <!-- Author.objects.get(pk=3).book_set.get(pk=2) 형식임 따라치라는거아님 님이 정보 추적해서 해야함. vars, dir 이용! -->
   <p><h4>Books</h4></p>
   <hr>
-  <p>
-  <dl>
+  <p><dl>
     {% for book in author.book_set.all %}
       <dt>{{ book }}</dt>
       <dd>{{ book.summary }}</dd>
     {% endfor %}
-  </dl>
-  </p>
+  </dl></p>
 {% endblock %}
