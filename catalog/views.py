@@ -6,7 +6,7 @@ from catalog.models import Book, Author, BookInstance, Genre
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-def index(request):
+def Index(request):
     num_books = Book.objects.all().count()
     num_instances = BookInstance.objects.all().count()
     num_instances_available = BookInstance.objects.filter(status__exact="a").count()

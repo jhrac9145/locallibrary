@@ -19,4 +19,13 @@
     <li><strong>Authors:</strong> {{ num_authors }}</li>
   </ul>
   <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+  {% if user.is_authenticated %}
+    
+    {% if user.username == "박준현" %}
+     <p>{{ user.get_username }} 님, 안녕하세요.</p>
+     <li><a href="{% url 'my-borrowed' %}">VIP 전용 페이지</a></li>
+    {% else %}
+      <p>안녕하세요, 고객님.</p> 
+    {% endif %}    
+  {% endif %}
 {% endblock %}
