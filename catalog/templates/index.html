@@ -22,10 +22,7 @@
   
   {% if user.is_authenticated %}  
     {% if user.username == "박준현" or user.username == "admin" %}
-     <p>{{ user.get_username }} 님, 안녕하세요.</p>
-     <li><a href="{% url 'all-borrowed' %}">사서 전용 페이지</a></li>
-    {% else %}
-      <p>안녕하세요, 고객님.</p> 
+     <p>사서 {{ user.get_username }} 님, 안녕하세요.</p>
     {% endif %}    
   {% endif %}
 {% endblock %}
