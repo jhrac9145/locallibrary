@@ -73,24 +73,32 @@ class LoanedBooksListView(LoginRequiredMixin,generic.ListView):
 
 @permission_required('catalog.can_mark_returned')
 def renew_book_librarian(request, pk):
+    """View function for renewing a specific BookInstance by librarian."""
     book_instance = get_object_or_404(BookInstance, pk=pk)
 
+    # If this is a POST request then process the Form data
     if request.method == 'POST':
-        book_renewal_form = RenewBookForm(request.POST)
 
-        if book_renewal_form.is_valid():
-            book_inst.due_back = book_renewal_form.clean_renewal_date['renewal_date']
-            book_inst.save()
+        # Create a form instance and populate it with data from the request (binding):
+        form = RenewBookForm(request.POST)
 
-            return HttpResponseRedirect(reverse('/'))
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            book_instance.due_back = form.cleaned_data['renewal_date']
+            book_instance.save()
 
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('all-borrowed') )
+
+    # If this is a GET (or any other method) create the default form.
     else:
         proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
-        book_renewal_form = RenewBookForm(initial={'renewal_date': proposed_renewal_date})
+        form = RenewBookForm(initial={'renewal_date': proposed_renewal_date})
 
-        context = {
-            'form': book_renewal_form,
-            'book_instance': book_instance,
-        }
+    context = {
+        'form': form,
+        'book_instance': book_instance,
+    }
 
-    return render(request, 'catalog/book_renew_librarian.html', context)
+    return render(request, 'catalog/book_renew_librarian.html', context) 
